@@ -2,7 +2,17 @@ import { useState, useEffect } from "react";
 import femaleProfile from "./images/femaleProfile.jpg";
 import maleProfile from "./images/maleProfile.jpg";
 
+
+    // selected team state hook 
+  
+
+
 const Employees = () => {
+
+    const [selectedTeam, setSelectedTeam] = useState("TeamA");
+
+
+
   const [employees, setEmployees] = useState([
     {
       id: 1,
@@ -90,10 +100,21 @@ const Employees = () => {
     },
   ]);
 
+  function handleTeamSelectionChange(e){
+    setSelectedTeam(e.target.value);
+    console.log(e.target.value);
+}
   return (
+
     <main className="container">
       <div className="row justify-content-center mt-3 mb-3">
-        <div className="col-8">
+        <div className="col-6">
+            <select className="form-select form-select-lg" value={selectedTeam} onChange={handleTeamSelectionChange} >
+                <option value="TeamA">TeamA</option>
+                <option value="TeamB">TeamB</option>
+                <option value="TeamC">TeamC</option>
+                <option value="TeamD">TeamD</option>
+            </select>
             <div className="card-collection">
           {employees.map((employee) => (
             <div key={employee.id} className="card m-2">
