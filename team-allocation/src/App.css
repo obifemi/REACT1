@@ -5,3 +5,6 @@ body{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
+.standout{
+    box-shadow: 0 0 10px 0 rgba(0,250,0,0.7)
+}

@@ -9,7 +9,7 @@ import maleProfile from "./images/maleProfile.jpg";
 
 const Employees = () => {
 
-    const [selectedTeam, setSelectedTeam] = useState("TeamA");
+    const [selectedTeam, setTeam] = useState("TeamA");
 
 
 
@@ -100,10 +100,33 @@ const Employees = () => {
     },
   ]);
 
-  function handleTeamSelectionChange(e){
-    setSelectedTeam(e.target.value);
-    console.log(e.target.value);
-}
+  function handleTeamSelectionChange(e) {
+    console.log("handleTeamSelectionChange called");
+    setTeam(e.target.value);
+  }
+
+
+  function handleEmployeeCardClick(event) {
+    console.log("handleEmployeeCardClick called");
+  
+  
+    const clickedEmployeeId = parseInt(event.currentTarget.id);
+    const updatedEmployees = employees.map((employee) => {
+      if (employee.id === clickedEmployeeId) {
+        if (employee.teamName === selectedTeam) {
+          return { ...employee, teamName: "" };
+        } else {
+          return { ...employee, teamName: selectedTeam };
+        }
+      } else {
+        return employee;
+      }
+    });
+  
+    console.log("updatedEmployees:", updatedEmployees);
+    setEmployees(updatedEmployees);
+  }
+
   return (
 
     <main className="container">
@@ -117,8 +140,11 @@ const Employees = () => {
             </select>
             <div className="card-collection">
           {employees.map((employee) => (
-            <div key={employee.id} className="card m-2">
-              <img src= {employee.gender==='female'?femaleProfile:maleProfile}  alt="" className="card-image-top" style={{cursor: "pointer"}} />
+            <div key={employee.id}   className={employee.teamName === selectedTeam? "card m-2 standout": "card m-2"} style={{cursor: "pointer"}} 
+            onClick={handleEmployeeCardClick} id={employee.id}>
+
+            {(employee.gender==='male')? <img src={maleProfile} className="card-img-top"/> : <img src={femaleProfile} className="card-img-top" alt="..." />}
+
                 <div className="card-body">
               <h5>Full Name: {employee.fullName}</h5>
               <p className="card-text"> <b>Designation:</b> {employee.designation} </p>
@@ -130,6 +156,6 @@ const Employees = () => {
       </div>
     </main>
   );
-};
+}
 
 export default Employees;
