@@ -8,3 +8,6 @@ body{
 .standout{
     box-shadow: 0 0 10px 0 rgba(0,250,0,0.7)
 }
+h1, h2, h3, h4, h5, h6, p{
+    text-align: center;
+}

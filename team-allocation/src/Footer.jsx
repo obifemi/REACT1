@@ -1,6 +1,7 @@
 const Footer = () => {
+    const today = new Date();
     return (
-        <h1>Footer </h1>
+        <h1 className="bg-primary">Team Member Allocation App - {today.getFullYear()} </h1>
         )    
     };
         
