@@ -7,11 +7,11 @@ import { useState, useEffect } from 'react';
 
 
 function App() {
-      const [selectedTeam, setTeam] = useState("TeamA");
+      const [selectedTeam, setTeam] = useState( JSON.parse(localStorage.getItem('selectedTeam')) || "TeamA");
 
 
 
-  const [employees, setEmployees] = useState([
+  const [employees, setEmployees] = useState( JSON.parse(localStorage.getItem('employeeList')) || [
     {
       id: 1,
       fullName: "Bob Jones",
@@ -98,6 +98,13 @@ function App() {
     },
   ]);
 
+  useEffect(() => {
+    localStorage.setItem("employeeList", JSON.stringify(employees));
+  }, [employees])
+
+  useEffect(() => {
+    localStorage.setItem("selectedTeam", JSON.stringify(selectedTeam));
+  }, [selectedTeam])
 
 
   function handleTeamSelectionChange(e) {
